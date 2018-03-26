@@ -1,0 +1,42 @@
+# Doctrine Configuration
+doctrine:
+    dbal:
+        default_connection: prod
+        connections:
+            prod:
+                driver: pdo_mysql
+                unix_socket: /var/run/mysqld/mysqld.sock
+                dbname: '%database_name%'
+                user: '%database_user%'
+                password: '%database_password%'
+                charset: utf8mb4
+            dev:
+                driver: pdo_mysql
+                host: '%database_host%'
+                port: '%database_port%'
+                dbname: '%database_name%'
+                user: '%database_user%'
+                password: '%database_password%'
+                charset: utf8mb4
+
+    orm:
+        auto_generate_proxy_classes: '%kernel.debug%'
+        #naming_strategy: doctrine.orm.naming_strategy.underscore
+        #auto_mapping: true
+        default_entity_manager: prod
+        entity_managers:
+            prod:
+                query_cache_driver:
+                    type:                 apcu
+                metadata_cache_driver:
+                    type:                 apcu
+                mappings:
+                    EasyVocabularyBundle: { type: annotation, dir: Entity/ }
+
+            dev:
+                query_cache_driver:
+                    type:                 array
+                metadata_cache_driver:
+                    type:                 array
+                mappings:
+                    EasyVocabularyBundle: { type: annotation, dir: Entity/ }

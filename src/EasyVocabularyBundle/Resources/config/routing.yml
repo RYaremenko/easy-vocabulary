@@ -1,0 +1,3 @@
+easy_vocabulary_homepage:
+    path:     /
+    defaults: { _controller: EasyVocabularyBundle:Default:index }
